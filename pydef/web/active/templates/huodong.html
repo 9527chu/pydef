@@ -1,0 +1,99 @@
+{% extends "base_index.html" %}
+{% block title %}活动{% endblock %}
+{% block content %}
+   <div style="height:15px;margin-left:15px;">
+   <div >
+   <h3 >活动</h3>
+   
+   
+   </div>
+   </div>
+   <hr/>
+    <div class="container">
+        <div class="row">
+            
+          
+         <div class="span6">
+            {% for ac in active %}
+              <div class="row">          
+             <div class="span2" style="cursor:pointer">
+               <img src="/static/{{ac.picture}}" class="img-polaroid">
+    	        	     <div class="row">    	        	        
+                        <div class="span1">
+                        {% if ac in up.fllowa.all%}
+                        <a href="/flwa/?id={{ac.id}}"><input type="button" value="取消关注" "></a>
+                        {%else%}
+                        <a href="/flwa/?id={{ac.id}}"><input type="button" value="关注""></a>
+                        {%endif%}                        
+                        </div>
+                        <div class="span1">
+                        {%if ac in up.joina.all%}
+                        <a href="/joia/?id={{ac.id}}" ><input type="button" value="不参加" " class="span1"></a>
+                        {%else%}
+                        <a href="/joia/?id={{ac.id}}" ><input type="button" value="参加" " class="span1"></a>
+                        {%endif%}                        
+                        </div>
+                    </div>                        
+    	       </div>
+    	       <div class="span4">
+    	        	   <div class="row">
+                       <div class="span2">
+                       标题：<a href="/disact/{{ac.id}}">{{ac.title}}</a>
+                       </div>
+                       <div class="span2">
+                       发起人：<a href="/user/home/?id={{ac.user.id}}" >{{ac.user.username}}</a>
+                       </div>
+                  </div>                              
+                  <div class="row">活动说明：{{ac.content}}</div>
+                  <div class="row">
+                         评论：good             
+                  </div>
+                  <div class="row">
+                     <div class="span1 offset3">
+                  <a href="" ><button>评论</button></a>
+                     </div>
+                  </div>
+             </div>
+             </div>
+              {% endfor%}    
+         
+         
+        
+              
+        </div>
+    
+    
+    
+    
+    
+    
+    </div>
+
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1357442892180174" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+{% endblock %}

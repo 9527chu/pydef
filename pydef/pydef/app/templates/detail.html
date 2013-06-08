@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+<div class="row" style="margin-top:50px;">
+  <div class="span5 offset1" style="margin-left:120px;">
+  
+     <div class="row">
+       <div class="span3">
+        <h4>函数名:<a href="/search/detail/?id={{funct.id}}" >{{funct.name}}</a> </h4>
+       </div>
+       <div class="span2" style="margin-left:-10px;margin-top:15px;">
+         <form method="post" action="/search/category/" style="display:none" name="mk">
+        <input type="hidden" value="{{funct.module.name}}" name="op">        
+          </form>
+         <a  onclick="document.mk.submit();" >{{funct.module.name}}</a>
+       </div>
+       
+      </div>
+     
+      <div>
+        <table class="table table-condensed" style="width:330px;">
+            <tr class="warning">
+              <td style="width:70px">语法格式：</td>
+              <td>{{funct.format}}</td>                          
+            </tr>
+            <tr class="info">
+              <td>函数说明：</td>
+              <td>{{funct.intro}}</td>                          
+            </tr>
+            
+        </table>
+        示例：
+         <table class="table table-condensed" style="width:330px;">
+            <tr class="error">
+              <td style="width:70px">input>></td>
+              <td>{{funct.inputs}}</td>                          
+            </tr>
+            <tr class="success">
+              <td>output>></td>
+              <td>{{funct.outputs}}</td>                          
+            </tr>
+            
+        </table>
+        <div class="row">
+        
+        
+          <div class="span2 ">贡献者:<a href="" >@{{funct.user.username}}</a></div>
+          <div class="span2 offset1" >
+          <form action="/search/like/" method="post" name="like" style="display:none">
+           <input type="text" value="{{funct.id}}" name="lk">
+           <input type="text" value="{{rp}}?id={{funct.id}}" name="rp">
+          </form>
+          {% if ts == 1 %}
+          您已经喜欢过了
+          {%else%}
+          <img src="/statics/picture/heart.png" title="赞同" onclick="document.like.submit();">
+             <strong>+</strong>
+           
+          {{funct.fans}}
+          {%endif%}
+                 
+           
+           </div>
+          
+        
+        </div>      
+    </div>
+    
+    
+      <div style="margin-top:20px;">
+       提出您的疑问和建议：
+      <form method="post" action="/search/detail/?id={{funct.id}}">
+         <textarea rows="4"  name="cont" style="width:300px;"></textarea><br/>
+         <input type="hidden" name="id" value="{{funct.id}}">
+         <input type="hidden" name="name" value="@{{funct.user.username}}">
+         <button class="btn btn-success">提交</button>
+      </form>
+
+   
+
+    
+      </div>
+
+
+      <div class="row">
+      <div class="span1 offset3">
+       <a href="/search/"  title="返回查询首页"><i class="icon-hand-left"></i>返回</a>
+      </div>
+      </div>
+    
+
+   </div>
+  
+  
+  <div class="span4" style="margin-left:80px;">
+  
+  
+   
+       相关讨论：
+     <hr/ style="width:300px;margin-top:0px;">
+     
+     
+     <div>
+
+       <div class="row" style="width:350px;margin-left:-30px;">
+          
+          {%for quse in qs%}
+         <a href="/search/qusoffun/?q_id={{quse.id}}" ><p class="text-error"> 问题{{quse.id}}：</p></a>
+           
+         <blockquote >
+           <p>{{quse.content}}</p>
+           <small>@<cite title="Source Title">{{quse.user.username}}</cite></small>
+         </blockquote>
+         
+         {%endfor%}
+         
+         
+         
+          
+       </div>
+       
+       
+ 
+        
+        <div class="row">
+        <div class="pagination pagination-centered">
+          <ul>
+                        
+           {% if qs.has_previous %}
+            <li class="active"><a href="/search/detail/?id={{id}}&page={{ qs.previous_page_number }}"><<</a></li>
+            {% else %}
+            <li class="disabled"><a ><<</a></li>
+            {% endif %}
+            
+            {% for i in q_list %}
+              {% if i == qs.number %}
+            <li class="disabled"><a >{{i}}</a></li>
+               {% else %}    
+            <li class="active"><a href="/search/detail/?id={{id}}&page={{i}}">{{i}}</a></li>
+               {% endif %} 
+              {% endfor %}
+            {% if qs.has_next %}      
+            <li class="active"><a href="/search/detail/?id={{id}}&page={{ qs.next_page_number }}">>></a></li>
+               {% else%}    
+           <li class="disabled"><a >>></a></li>
+               {% endif %}   
+          </ul>
+        </div>
+      </div>
+
+  <!--
+   <div>
+
+     <div class="row" style="width:350px;margin-left:-30px;">
+      <p class="text-error"> 问题：</p>
+     
+         <blockquote >
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+        </blockquote>   
+        
+      <p class="text-warning"> 答：</p>
+        <blockquote class="pull-right">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+        </blockquote>
+       
+        
+
+       
+       
+     </div>
+   </div>
+    <div >
+    
+   
+        <div class="pagination pagination-centered">
+          <ul>
+            <li class="disabled"><a href=""><<</a></li>
+            <li class="active"><a href="">1</a></li>
+            <li class="active"><a href="">2</a></li>
+            <li class="active"><a href="">3</a></li>
+            <li class="active"><a href="">>></a></li>
+          </ul>
+        </div>
+    
+    </div>
+    <div >
+      
+      <ul class="pager">
+        <li><a href="">上一问题</a></li>
+        <li><a href="">下一问题</a></li>
+      </ul>
+     
+    </div>
+      -->
+  </div>
+    
+    
+    
+    
+    
+    
+    
+  </div>
+
+
+
+
+
+<script type="text/javascript">
+function nextpage(){
+    p = new XMLHttpRequest()
+    p.open('GET','/turnpage/',true)
+    p.send();
+    document.getElementById("myDiv").innerHTML=p.responseText;
+    
+} 
+ 
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}添加函数{% endblock %}
+{% block content %}
+<div class="row">
+
+    <div class="row">
+       <div class="span3 offset2" style="margin-top:30px">
+        <h4>函数列表 </h4>
+       </div>
+    </div>
+    
+ <div class="span3 offset2" style="margin-top:55px;margin-right:50px">
+ 
+
+   {% for func in functs %}	
+   函数名：<a href="/app/show_func1/{{func.id}}" > 
+   
+   {{func}}</a><br />
+    函数格式
+   {{func.format}}<br />
+ 
+   <hr width="160px" style="margin-right:500px">
+  
+   <br />
+   {% endfor%}
+
+   
+
+<div class="pagination">
+    <span class="step-links">
+        {% if functs.has_previous %}
+            <a href="?page={{ functs.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ functs.number }} of {{ functs.paginator.num_pages }}.
+        </span>
+
+        {% if functs.has_next %}
+            <a href="?page={{ functs.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+</div>
+{{funlist}}
+
+{% endblock %}

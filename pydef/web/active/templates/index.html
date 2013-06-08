@@ -1,0 +1,262 @@
+{% extends "base_index.html" %}
+{% block title %}首页{% endblock %}
+{% block content %}
+   
+   
+   
+    <div class="container">    	
+    	  <div >    	    
+    	     <h3 style="height:10px;">活动</h3>    	   
+    	  </div>     
+    	<hr/>
+    	<div class="row">
+    	     {% for ac in active %}
+	        <div  class="span4" style="margin-bottom:10px;">
+	            <div class="row">
+    	        	     <div class="span2" style="cursor:pointer;float:left;"><img src="/statics/{{ac.picture}}" class="img-polaroid" style="width:100px;">
+    	        	          <div class="row" style="margin-left:0px;">    	        	        
+                            
+                        {% if ac in up.fllowa.all%}
+                        <a href="/flwa/?id={{ac.id}}">取消关注</a>
+                        {%else%}
+                        <a href="/flwa/?id={{ac.id}}" style="background-color:#ffff88">关注</a>
+                        {%endif%}                        
+                        
+                       
+                        {%if ac in up.joina.all%}
+                        <a href="/joia/?id={{ac.id}}" >取消参加</a>
+                        {%else%}
+                        <a href="/joia/?id={{ac.id}}" style="background-color:#ffff88">参加</a>
+                        {%endif%}                        
+                        
+                         </div>                        
+    	        	     </div>
+    	        	     <div class="span2" style="margin-left:-5px;">
+    	        	        <div class="row">
+                       标题：<a href="/disact/{{ac.id}}/">{{ac.title}}</a><br/>
+                       发起人：<a href="">{{ac.user.username}}</a>
+                       </div>                              
+                       <div class="row">活动说明：{{ac.content|truncatechars:40}}</div>
+                    </div>
+                 </div>    
+                    <div class="row">
+                        <div class="span1"><a href="" class="bqs">标签1</a></div>
+                        <div class="span1"><a href="" class="bqs">标签244</a></div>
+                        <div class="span1"><a href="" class="bqs">标签3</a></div>                        
+                        <div class="span1"><a href="" class="xq">详情>>></a></div>
+                    </div>
+                 <div style="color:#00ee00;">----------------------------------------------------------</div>   
+    	    </div>
+    	    {% endfor%}
+    	    
+      </div>
+
+
+
+
+
+    <div class="container">
+    	<div > 
+    		<h3 style="height:10px;">好玩</h3>
+    	</div>
+       <hr/>
+     <div class="row">
+     
+      <div class="span1">
+      <h1>旅游</h1>
+      </div>
+      <div class="span10">
+      <div class="row">
+      
+      
+      <div style="heitht:300px;">
+      <div class="span2">
+       <img src="/statics/image/ometepe.jpg" style="width:">
+      </div>
+      <div class="span3">
+      Ometepe位于离马拉瓜约两小时船程的尼加拉瓜湖，Ometepe被誉为自然世界新七大奇迹之一。这是一个由双子火山口形成<!--的小岛屿，这两座火山都是活动的。是你过去没有亲眼所见的景点。-->
+      </div>
+      </div>
+      
+      <div style="heitht:500px;margin-bottom:50px;">
+      <div class="span2">
+        <img src="/statics/image/manual.jpg" style="width:">
+      </div>
+      <div class="span3">
+      这里有世界顶级海滩之一，也是深受欢迎的哥斯达黎加的国家公园的所在地。Manual Antonio 不会让你失望。越过整个丛林，你会看到三种不同类型的猴子。<!--同时，它也是知名的冲浪去处。这里是你死之前一定要来的景点。-->
+      </div>
+      </div>
+      
+      
+      <div style="heitht:500px;margin-bottom:50px;">
+      <div class="span2">
+        <img src="/statics/image/medf.jpg" style="width:">
+      </div>
+      <div class="span3">
+      麦兜弟弟最大的梦想就是去马尔代夫，那个水清沙白的小岛国成为多少人梦中的浪漫之地。但马尔代夫的美景全部位于低海拔，<!--全国平均高度仅高出海面1.5米，八成的国土不高于1米。如果联合国对全球暖化下海面上升速度计算准确的话，最快一个世纪这些岛屿将被海水逐一吞噬。-->
+      </div>
+      </div>      
+      
+      
+      
+      <div class="span2">
+        <img src="/statics/image/lswjs.jpg" style="width:">
+      </div>
+      <div class="span3">
+      拉斯维加斯是绝无仅有的一个城市，它是闻名全球的成人游乐场：全天候的刺激赌博，世界级的商店和餐馆，让拉斯维加斯成为了美国最吸引人的观光圣地之一。
+      </div> 
+      </div>
+      </div>           
+    </div>
+    <div class="row">
+       <div class="span8 offset1" style="color:#00ee00;">
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      </div>
+    </div>
+     
+    
+    <div class="row">
+      <div class="span1">
+      <h1>运动</h1>
+      </div>
+      <div class="span2">
+       <img src="/statics/image/wxj.jpg" style="width:150px;">
+      </div>
+      <div class="span4">
+      万兴居，就在鼓楼东大街上，路北，距离鼓楼大约300米,小门脸。门前有一棵大树，所以招牌看的不是很清楚。这里的服务员都是懒洋洋的，只要开着门，什么时候都有饭吃。，要的凉菜不到10元。粥随意喝几碗，便宜！趁着肚圆，穿过烟袋斜街，不上桥。径直往前走。看看原来广化寺，看看那些老四合院……没准还能和在这里安家的罗大佑打一照面。 
+      
+      </div>
+      <div class="span4">
+        <div class="row">
+      <img src="/statics/image/wxj2.jpg" style="width:150px;">
+      <img src="/statics/image/wxj3.jpg" style="width:150px;">
+        </div>
+      </div>    
+    </div>
+
+      
+    </div>
+
+
+  <div class="container">
+    <div > 
+    		<h3 style="height:10px;">美味</h3>
+    </div>
+       <hr/>
+    <div class="row">
+      <div class="span1">
+      <h1>汤类</h1>
+      </div>
+      <div class="span2">
+       <img src="/statics/image/wxj.jpg" style="width:150px;">
+      </div>
+      <div class="span4">
+      万兴居，就在鼓楼东大街上，路北，距离鼓楼大约300米,小门脸。门前有一棵大树，所以招牌看的不是很清楚。这里的服务员都是懒洋洋的，只要开着门，什么时候都有饭吃。，要的凉菜不到10元。粥随意喝几碗，便宜！趁着肚圆，穿过烟袋斜街，不上桥。径直往前走。看看原来广化寺，看看那些老四合院……没准还能和在这里安家的罗大佑打一照面。 
+      
+      </div>
+      <div class="span4">
+        <div class="row">
+      <img src="/statics/image/wxj2.jpg" style="width:150px;">
+      <img src="/statics/image/wxj3.jpg" style="width:150px;">
+        </div>
+      </div>    
+    </div>
+    
+    <div class="row">
+       <div class="span8 offset1" style="color:#00ee00;">
+    xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      </div>
+    </div>
+    <div class="row">
+      <div class="span1">
+      <h1>菜类</h1>
+      </div>
+      <div class="span2">
+       <img src="/statics/image/wxj.jpg" style="width:150px;">
+      </div>
+      <div class="span4">
+      万兴居，就在鼓楼东大街上，路北，距离鼓楼大约300米,小门脸。门前有一棵大树，所以招牌看的不是很清楚。这里的服务员都是懒洋洋的，只要开着门，什么时候都有饭吃。，要的凉菜不到10元。粥随意喝几碗，便宜！趁着肚圆，穿过烟袋斜街，不上桥。径直往前走。看看原来广化寺，看看那些老四合院……没准还能和在这里安家的罗大佑打一照面。 
+      
+      </div>
+      <div class="span4">
+        <div class="row">
+      <img src="/statics/image/wxj2.jpg" style="width:150px;">
+      <img src="/statics/image/wxj3.jpg" style="width:150px;">
+        </div>
+      </div>    
+    </div>    
+
+  </div>
+  
+  
+    
+  <div class="container">
+       <div>
+    		<h3 style="height:10px;">逛逛</h3>
+       </div>
+       <hr/>
+     <div class="row">
+           {% for s in say %} 
+          <div class="span6" style="margin-bottom:10px;">
+                        
+             <div class="row">
+               <div class="span2">
+               <div style="background-image:url(/statics/image/bghdimg.jpg);width:100px;height:100px;cursor:pointer">                             
+               <a href="" ><img src="/static/{{s.user.get_profile.headimg}}" ></a>
+               </div>               
+               
+               <a href="/user/home/?id={{s.user.id}}" >{{s.user.username}}</a>&nbsp;&nbsp;&nbsp;
+               
+                {% if s.user in up.fllowp.all%}
+               <a href="/qxp/?id={{s.user.id}}" >取消关注</a>
+                {%else%}
+                    {%if s.user == up.user %}
+                    {%else%}
+               <a href="/flwp/?id={{s.user.id}}" >
+               +关注</a>
+                    {%endif%}
+                 {%endif%}               
+               </a>
+               </div>
+               <div class="span4" style="margin-left:-15px;">                             
+               {{s.content}}<br/>      
+               {{s.time}}
+                 {% for comm in comms%}
+                 <div class="row">
+                   <div class="span3 offset1">
+                     {{comm.content}}<br/>
+                     {{comm.time}}
+                    </div>                 
+                 </div>
+                 {%endfor%}
+                 
+                 <div class="row" style="display:none" id="hideform{{s.id}}">
+                  <div class="span4">
+                  <form action="/saycmm/?say_id={{s.id}}" method="post">
+                  <textarea rows="3" class="span3" name="content"></textarea><a onclick="fuyuan({{s.id}});">收起</a>
+                  <br/>
+                  <button>发表</button>
+                  </form>
+                   </div>
+                </div>
+                
+                 <div class="row">
+                    <div class="span1 offset3">
+                    <button onclick="displfm({{s.id}});">评论</button>
+                    </div>
+                 </div>
+               </div>           
+             </div>
+             
+            <div style="color:#00ee00;">----------------------------------------------------------------------------------------</div>   
+         </div>
+          {% endfor%} 
+              
+        </div>  
+  
+  </div>  
+{%endblock%} 
+  
+  
+  
+ 

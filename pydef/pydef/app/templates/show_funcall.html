@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}添加函数{% endblock %}
+{% block content %}
+<div class="row" style="margin-top:50px;">
+   
+   
+     <div class="span5 offset1" style="margin-left:120px;">
+         <div class="row">
+         <p>我贡献的函数</p>
+         </div>
+         {%for funct in functs%}
+        <div class="row">
+       <div class="span3">
+        <h4>函数名:<a href="/search/detail/?id={{funct.id}}" >{{funct.name}}</a> </h4>
+       </div>
+       <div class="span2" style="margin-left:-10px;margin-top:15px;">
+         <form method="post" action="/search/category/" style="display:none" name="mk">
+        <input type="hidden" value="{{funct.module.name}}" name="op">        
+          </form>
+         <a  onclick="document.mk.submit();" >{{funct.module.name}}</a>
+       </div>
+       
+      </div>
+     
+      <div>
+        <table class="table table-condensed" style="width:330px;">
+            <tr class="warning">
+              <td style="width:70px">语法格式：</td>
+              <td>{{funct.format}}</td>                          
+            </tr>
+            <tr class="info">
+              <td>函数说明：</td>
+              <td>{{funct.intro}}</td>                          
+            </tr>
+            
+        </table>
+        示例：
+         <table class="table table-condensed" style="width:330px;">
+            <tr class="error">
+              <td style="width:80px">input(输入)</td>
+              <td>output(输出)</td>                          
+            </tr>
+            <tr class="success">
+              <td>{{funct.inputs}}</td>
+              <td>{{funct.outputs}}</td>                          
+            </tr>
+            
+        </table>
+        
+      </div>      
+       {%endfor%}
+     
+     
+      
+
+        
+        
+        <div class="row">
+        <div class="pagination pagination-centered">
+          <ul>
+                        
+           {% if functs.has_previous %}
+            <li class="active"><a href="/addfunct/show_funcall/?page={{ functs.previous_page_number }}"><<</a></li>
+            {% else %}
+            <li class="disabled"><a ><<</a></li>
+            {% endif %}
+            
+            {% for i in f_list %}
+              {% if i == funts.number %}
+            <li class="disabled"><a >{{i}}</a></li>
+               {% else %}    
+            <li class="active"><a href="/addfunct/show_funcall/?page={{i}}">{{i}}</a></li>
+               {% endif %} 
+              {% endfor %}
+            {% if functs.has_next %}      
+            <li class="active"><a href="/addfunct/show_funcall/?page={{ functs.next_page_number }}">>></a></li>
+               {% else%}    
+           <li class="disabled"><a >>></a></li>
+               {% endif %}   
+          </ul>
+        </div>
+      </div>
+
+
+     </div>
+     <div class="span5 "  >
+       <div class="row" style="margin-left:30px;">
+         <p>我提出的问题</p>
+       </div>
+       
+       
+       
+       <div class="row" style="width:350px;margin-left:10px;">
+    
+    
+        {%for quse in quses%}
+         <blockquote >
+        <p>{{quse.content}}</p>
+        <small>@<cite title="Source Title">{{quse.user.username}}</cite></small>
+        </blockquote>
+        {%endfor%}
+        
+        
+        {%if quses%}
+
+        <div class='span2 offset1'>
+     <a href="/search/detail/?id={{funct.id}}" >了解更多...</a>
+       </div>
+       {%else%}
+       {%endif%}
+    </div>
+     </div>
+
+
+</div>
+
+{% endblock %}

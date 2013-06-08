@@ -1,0 +1,152 @@
+{% extends "base1.html" %}
+{% block title %}个人主页{% endblock %}
+    {% block content %}
+   
+   <div class="container">
+      <div class="row">
+         <div class="span2" >
+          {% if um == user %}
+            <div style="margin-left:15px;">              
+               <div  style="background-image:url(/statics/image/bghdimg.jpg);width:100px;height:100px;">
+                 <a href="/user/home/" ><img src="/static/{{um.get_profile.headimg}}" class="img-polaroid"></a>
+               </div>                                                  
+                 <a href="/user/home/" style="margin-top:10px">{{user.username}}</a>                                                                                                        
+            </div>            
+             <hr/>             
+         <p><a href="/user/home" >好友动态</a></p>
+         <p><a href="/user/home/mysays/">我的说说</a></p>
+         <p><a href="/user/home/myact/">我的活动</a></p>
+         <p><a href="/user/home/myfriend/">我的好友</a></p>
+         <p><a href="">d3</a></p>
+         
+         <p><a href="">我参加的活动的分类的比例d3</a></p>
+         
+         <p>上次登录时间：{{user.last_login}}</p>
+         <p>上次登录ip：{{user.get_profile.ip}}</p>
+             {% else %}
+             <div style="margin-left:15px;">
+              
+               <div  style="background-image:url(/statics/image/bghdimg.jpg);width:100px;height:100px;">
+                 <a href="/user/home/" ><img src="/static/{{user.get_profile.headimg}}" class="img-polaroid"></a>
+               </div>                                                  
+                 <a href="/user/home/" style="margin-top:10px">{{user.username}}</a>                                                                                                        
+            </div>        
+            <hr/>
+             <p><a href="/user/home/?id={{user.id}}" >ta的说说</a></p>
+             <p><a href="/user/home/" >ta的资料</a></p>
+             <p><a href="" >ta的活动</a></p>
+             <p><a href="" >ta的好友</a></p>
+             <p>上次登录时间：<br/>
+             {{user.last_login|date:"Y,m,j G:s"}}</p>
+             <p>上次登录ip:<br/>
+             {{user.get_profile.ip}}</p>
+             {%endif%}         
+         </div>
+         
+         
+         
+         <div class="span7">
+           {% if um == user %}
+           <div class="row">
+              <form method="post" action="/user/shuoshuo/">
+              <textarea rows="2" style="resize:none"  name="shuo" class="span5"></textarea>
+              <br/>
+              <input type="submit" value="发表" class="btn">
+           
+              </form>
+           </div>
+           {% endif%}
+            {% for say in says %}
+            <div class="row">
+              <div class="span1">
+                  <div class="row"><img src="/static/{{say.user.get_profile.headimg}}" class="img-polaroid"></div>
+                  <div class="row">
+                  {% if say.user == um%}
+                  <a href="" >{{say.user.username}}</a>
+                  {%else%}
+                  <a href="/user/home/?id={{say.user.id}}" >{{say.user.username}}</a>
+                  {%endif%}
+                  </div>
+              </div>
+              <div class="span5" style="margin-left:40px;">
+              <div class="row">
+               
+               
+               {{say.content}} <br/>
+               {{say.time|date:"Y,m,j G:s"}}<br/>
+               </div>
+                    
+                                       
+                       {% for cmm in cmms %}
+                           {% if say == cmm.say%}
+                           <div class="row" style="margin-left:-70px;">
+                           <div class="span offset1" >                           
+                           <div class="row"><a href="" >{{cmm.user.username}}</a>:{{cmm.content}}</div>
+                           <div class="row">
+                           <div class="span2 offset2">{{cmm.time|date:"Y,m,j G:s"}}</div>
+                           </div>
+                           </div>
+                           </div>
+                           {%endif%}
+                       {%endfor%}
+                 
+                          
+                        
+                        
+                  
+               <div class="row" style="display:none" id="hideform{{say.id}}">
+                  <div class="span6 ">
+                  <form action="/saycmm/" method="post">
+                  <input type="hidden" value="{{say.id}}" name="id">
+                  <input type="hidden" value="{{url}}" name="url">
+                  <textarea rows="3" class="span5" name="content"></textarea><a onclick="fuyuan({{say.id}});">收起</a>
+                  <br/>
+                   <input type="submit" value="发表" class="btn">
+                  </form>
+                   </div>
+               </div>
+               
+               <div class="row offset3"  id="pl{{say.id}}">
+                                             
+               <button onclick="displfm({{say.id}});" >评论</button>
+               </div>
+               </div>
+               </div>
+               <hr/>
+               {%endfor%}
+            </div>
+          
+        </div>
+      
+      
+      
+      
+   </div>
+   </div>
+<script type="text/javascript" >
+ 
+      function displfm(id){
+         var pl = document.getElementById('pl'+id);
+ 			var hf = document.getElementById('hideform'+id);
+         hf.style.display="block";
+         pl.style.display="none";
+    
+
+}
+    function fuyuan(id){
+		var pl = document.getElementById('pl'+id);
+ 		var hf = document.getElementById('hideform'+id);
+    hf.style.display="none";
+    pl.style.display="block";
+             
+    }
+
+
+</script>
+
+   {% endblock %}
+
+
+
+
+

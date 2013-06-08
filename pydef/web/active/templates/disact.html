@@ -1,0 +1,45 @@
+{% extends "base_index.html" %}
+{% block title %}首页{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+     
+    <div class="span4" style="background-image:url(/statics/image/bg82.png);height:370px;width:300;">
+      <div class="row" >
+      <img src="/static/picture/{{act.picture}}">
+      <h3 style="margin-left:140px;">{{act.title}}</h3>
+      </div>
+      <div style="margin-left:20px;">
+      <h5>活动类别：{{act.leibie}}</h5>
+      <h5>举办地：{{act.city}} </h5>   
+      <h5>活动说明：{{act.content}}</h5>
+      <h5>举办时间：{{act.holdtime}}</h5>
+      <h5>收费标准：{{act.money}}元</h5>
+      <h5>活动标签：
+         {%for akwd in akwds %}
+          <a href="" >{{akwd.kword}}</a><i class="icon-tag"></i> 
+          {%endfor%}
+      </h5>
+      <h5>活动发起人： {{act.user.username}}</h5>
+      <a href="" ><button class="btn">关注</button></a><a href="" ><button class="btn">参加</button></a>
+    </div>
+  </div>
+ 
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

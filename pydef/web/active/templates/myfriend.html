@@ -1,0 +1,46 @@
+{% extends "base1.html" %}
+{% block title %}个人主页{% endblock %}
+    {% block content %}
+   
+   <div class="container">
+        <div class="row">
+         <div class="span2" >
+          
+            <div style="margin-left:15px;">              
+               <div  style="background-image:url(/statics/image/bghdimg.jpg);width:100px;height:100px;">
+                 <a href="/user/home/" ><img src="/static/{{user.get_profile.headimg}}" class="img-polaroid"></a>
+               </div>                                                  
+                 <a href="/user/home/" style="margin-top:10px">{{user.username}}</a>                                                                                                        
+            </div>            
+             <hr/>             
+         <p><a href="/user/home/" >好友动态</a></p>
+         <p><a href="/user/home/mysays/">我的说说</a></p>
+         <p><a href="/user/home/myact">我的活动</a></p>
+         <p><a href="/user/home/myflwp/">我的好友</a></p>
+         <p><a href="">d3</a></p>
+         
+         <p><a href="">我参加的活动的分类的比例d3</p>
+         
+            
+         </div>
+     
+        <div class="span8">
+            {%for p in user.get_profile.fllowp.all%}
+            <div class="span4">
+                <img src="/static/{{p.get_profile.headimg}}"><br/>
+                <a href="">{{p.username}}</a>
+            </div>
+            {%endfor%}
+        </div>
+      
+    </div>
+     
+   </div>
+
+
+   {% endblock %}
+
+
+
+
+

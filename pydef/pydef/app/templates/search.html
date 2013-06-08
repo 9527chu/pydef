@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+<div class="row" style="margin-top:50px;">
+  <div class="span4 offset1" style="margin-left:120px;">
+  
+    <div>
+       
+        <h4>快速查找：</h4>
+       
+       <div class="row" style="margin-top:10px;margin-left:30px;">
+        <form method="post" action="/search/name/" class="form-search">
+        <!--<input type="text" name="funname" class="input-medium search-query" placeholder="请输入函数名">
+        <input type="submit" class="btn" value="查询">    -->
+         
+         
+         
+         <div class="input-append">
+          <input type="text" class="span2 search-query" placeholder="请输入函数名" name="funname"> 
+          <button type="submit" class="btn btn-info"><i class="icon-search"></i></button>
+         </div>
+         
+         
+         </form>
+       </div>
+    </div>
+    
+    <hr/>
+    <div style="margin-top:10px;">
+       
+        <h4>索引查找：</h4>
+        
+       <div>
+       <div class="row" style="margin-top:10px;">       
+       <a href="/search/suoyin/?index=all" >全部</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=_" >_</a>(下划线)&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=a">A</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=b">B</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=c">C</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=d">D</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=e">E</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=f">F</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=g">G</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=h">H</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=i">I</a>&nbsp;|
+       </div>
+       <div class="row" style="margin-top:10px;">
+       <a href="/search/suoyin/?index=j">J</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=k">K</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=l">L</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=m">M</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=n">N</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=o">O</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=p">P</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=q">Q</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=r">R</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=s">S</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=t">T</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=u">U</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=v">V</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=w">W</a>
+       </div>
+       <div class="row" style="margin-top:10px;">
+       |&nbsp;<a href="/search/suoyin/?index=x">X</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=y">Y</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=z">Z</a>
+       </div>
+       </div>
+       
+       
+    </div>
+
+    <hr/>
+
+    <div style="margin-top:20px;">
+       
+       <h4>分类查询：</h4>        
+      
+       <div class="row" style="margin-left:30px;">
+       <form name="category_search" action="/search/category/" method="get" >     
+          
+         {%for i in modules%}
+         
+          <label class="radio">
+             
+           <input type="radio" name="index"  value="{{i.name}}" id="optionsRadios{{i.id}}" onclick="document.category_search.submit();" checked>
+             {{i.name}}
+            
+          </label> 
+               
+            {%endfor%}      
+       </form>
+       </div>
+    </div>
+
+
+    <div class="row">
+      <div class="span1 offset3">
+       <a href="/search/"  title="返回查询首页"><i class="icon-hand-left"></i>返回</a>
+      </div>
+    </div>
+
+
+   </div>
+  
+  
+  <div class="span5" style="margin-left:150px;">
+  
+  
+   
+    <h4> <p class="text-info">最新更新的函数</p></h4>
+  
+      
+     <div class="row" style="margin-left:5px;"> 
+      <table class="table table-hover" style="width:300px;">
+         <tr><th>函数名</th><th>函数说明</th><th>贡献人</th></tr>      
+      
+          {%for funct in functs%}         
+         <tr>
+         <td><a href="/search/disp/?id={{funct.id}}" >{{funct.name}}</td>
+         <td><abbr title="{{funct.intro}}" class="text-info">{{funct.intro|truncatechars:9}}</abbr></td>            
+         <td>{{funct.user.username}}</td>
+         
+         </tr>
+      
+   
+         {%endfor%}
+   
+      </table>
+      
+      
+      
+      <div class="row" style="margin-top:-20px;margin-left:-10px;">
+        <div class="pagination pagination-centered">
+          <ul>
+                        
+              {% if functs.has_previous %}
+            <li class="active"><a href="/search/?page={{ functs.previous_page_number }}"><<</a></li>
+              {%else%}
+            <li class="disabled"><a><<</a></li>
+              {%endif%}  
+               {%for i in f_list %}
+                 {% if i == functs.number %}    
+            <li class="disabled"><a>{{i}}</a></li>
+                 {% else %}
+            <li class="active"><a href="/search/?page={{i}}">{{i}}</a></li>
+                 {% endif%}
+               {% endfor %} 
+                    {% if functs.has_next %}
+            <li class="active"><a href="/search/?page={{functs.next_page_number}}">>></a></li>
+                    {%else%}
+           <li class="disabled"><a>>></a></li>
+                    {%endif%}       
+          </ul>
+        </div>
+      </div>
+      
+      
+     </div>
+     
+   
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    
+  </div>
+
+
+
+
+
+<script type="text/javascript">
+function nextpage(){
+    p = new XMLHttpRequest()
+    p.open('GET','/turnpage/',true)
+    p.send();
+    document.getElementById("myDiv").innerHTML=p.responseText;
+    
+} 
+ 
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

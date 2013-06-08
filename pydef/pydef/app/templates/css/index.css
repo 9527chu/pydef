@@ -1,0 +1,22 @@
+
+#head{
+   margin-top: 25px;	
+	}
+#hdform{
+   margin-top: 20px;	
+	}
+input.ipt{
+   margin-bottom: 5px;
+   width: 150px;	
+	}
+input{
+   width: 180px;	
+	}
+#two{
+	background-color: #aaaaaa;
+	height: 200px;
+	}
+#one{
+	background-color: #999999;
+	height: 400px;
+	}

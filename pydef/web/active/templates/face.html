@@ -1,0 +1,42 @@
+{% extends "base1.html" %}
+{% block title %}编辑头像{% endblock %}
+{% block content %}
+  
+   <div class="container">
+      <div class="row">
+         <div class="span3" >
+         <p><a href="/user/user_info/">个人资料</a></p>
+         <p><a href="/user/face/">编辑头像</a></p>
+         <a href="/user/change_passwd/">修改密码</a>
+         
+         
+         </div>
+         <div class="span9" >
+         {% if pd == 1 %}
+         头像上传错误
+         {% elif pd == 2 %}
+         头像修改成功
+         {% else %}
+         编辑头像
+         {% endif %}
+         <hr/>
+           <div class="row">
+              <div class="span4">
+                 <form method="post" enctype="multipart/form-data" action="/user/face/">
+                  <input type="file" name="hdimg"> <br/>             
+                  <input type="submit" value="保存" class="btn btn-info">                 
+                 </form>
+               </div>
+               {% if up.headimg %}
+               <div class="span3">
+                 <img src="/static/{{up.headimg}}">
+               </div>
+               {% endif %}
+           </div>         
+         </div>
+      </div>
+   </div>
+
+{% endblock %}
+</body>
+</html>

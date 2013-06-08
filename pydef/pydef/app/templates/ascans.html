@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}问答{% endblock %}
+{% block content %}
+
+
+       
+    
+
+
+ <div class="row" style="margin-top:35px">
+ 
+     
+     <div class="span4 offset1" >
+     <div class="row">
+     <div class="span2" >
+     <h4> <p class="text-info">提出问题</p></h4>
+     </div>
+     <div class="span2" style="margin-left:20px;">
+     <h6><a href="/addfunct/show_funcall" >我提出的问题>></a></h6>
+     </div>
+     </div>
+        
+    
+
+
+
+ 
+     <div class='row' style="margin-left:30px;">
+        <form method='post' action="">
+        
+         {{qf.as_p}}
+         <input type="hidden" name="juge" value="1">
+       <input type='submit' value='提交' class="btn btn-success">
+        </form>
+     </div>
+     
+     
+     
+   <!--    <div class='row' style="margin-left:30px;">
+         <form method='post' action="/ascans/sarqus/">
+         
+         {{sf.as_p}}
+         <input type="hidden" name="juge" value="2">
+         <input type='submit' value='查询' class="btn btn-success">
+         </form>
+     </div>
+  -->
+   
+
+
+
+   </div>
+
+ 
+<div class="span5" style="margin-left:150px;">
+  
+  
+   
+    <h4> <p class="text-info">最新提出的问题</p></h4>
+  
+
+     <div>
+      {% for q in qus %}
+        {{q.content}}<br />
+        {{q.user}}   <br />
+        {{q.time}}   <br />
+      {% endfor %}
+     </div>
+    
+      
+     <div class="row" style="margin-left:5px;"> 
+      
+      
+      
+      
+      <div class="row">
+        <div class="pagination pagination-centered">
+          <ul>
+                        
+           {% if qus.has_previous %}
+            <li class="active"><a href="/ascans/?page={{ qus.previous_page_number }}"><<</a></li>
+            {% else %}
+            <li class="disabled"><a ><<</a></li>
+            {% endif %}
+            
+            {% for i in q_list %}
+              {% if i == qus.number %}
+            <li class="disabled"><a >{{i}}</a></li>
+               {% else %}    
+            <li class="active"><a href="/ascans/?page={{i}}">{{i}}</a></li>
+               {% endif %} 
+              {% endfor %}
+            {% if functs.has_next %}      
+            <li class="active"><a href="/ascans/?page={{ qus.next_page_number }}">>></a></li>
+               {% else%}    
+           <li class="disabled"><a >>></a></li>
+               {% endif %}   
+          </ul>
+        </div>
+      </div>
+      
+      
+     </div>
+     
+   
+      
+    </div>
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
+
+
+

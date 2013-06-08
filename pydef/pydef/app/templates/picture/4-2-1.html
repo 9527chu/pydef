@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type:" content="text/html;charset=utf-8" />
+    <style>
+        #panel {
+            position:relative;
+            width:100px;
+            height:100px;
+            border:1px solid #00ffaa;
+            background: #00ffaa;
+            cursor:pointer;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("div").click(function(){
+                $(this).animate({left: "500px"}, 3000); //3秒内，向右移动500像素
+            });
+        })
+    </script>
+</head>
+<body>
+<div > <img src="0.jpg"></div>
+</body>
+</html>
+

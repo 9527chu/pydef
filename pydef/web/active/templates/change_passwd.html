@@ -1,0 +1,39 @@
+{% extends "base1.html" %}
+{% block title %}修改密码{% endblock %}
+{% block content %}
+  
+   <div class="container">
+      <div class="row">
+         <div class="span3" >
+         <p><a href="/user/user_info/">个人资料</a></p>
+         <p><a href="/user/face/">编辑头像</a></p>
+         <a href="/user/change_passwd/">修改密码</a>
+         <a href=""></a>
+         <a href=""></a>
+        
+         </div>
+         <div class="span9" >
+         {% if pd == 1  %}
+         <span class="label label-warning">原密码错误</span>
+         {% elif pd == 2%}  
+          <span class="label label-warning">两次输入的密码不匹配</span>
+         {% elif pd == 3 %} 
+          <span class="label label-success">密码修改成功</span>        
+         {% else %}
+         <span class="label">修改密码</span>
+         {% endif %}
+         <hr/>
+         <form method="post" action="">
+            &nbsp;&nbsp;&nbsp;当前密码：<input type="password" name="oldpswd"><br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新密码：<input type="password" name="newpswd1"><br/>
+           确认新密码：<input type="password" name="newpswd2"><br/>               
+            <input type="submit" value="保存" class="btn btn-info">                 
+         </form>
+         
+         </div>
+      </div>
+   </div>
+
+{%endblock%}
+</body>
+</html>

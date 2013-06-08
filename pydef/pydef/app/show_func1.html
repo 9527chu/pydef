@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+<div class="row" style="margin-top:50px;">
+  <div class="span5 offset1" style="margin-left:120px;">
+  
+    <div class="row">
+       <div class="span3">
+        <h4>函数名:<a href="" >{{func.name}}</a> </h4>
+       </div>
+    </div>
+     
+    <div>
+        <table class="table table-condensed" style="width:330px;">
+            <tr class="warning">
+              <td style="width:70px">语法格式：</td>
+              <td>{{func.format}}</td>                          
+            </tr>
+            <tr class="info">
+              <td>函数说明：</td>
+              <td>{{func.intro}}</td>                          
+            </tr>
+            
+        </table>
+        示例：
+         <table class="table table-condensed" style="width:330px;">
+            <tr class="error">
+              <td style="width:80px">input(输入)</td>
+              <td>output(输出)</td>                          
+            </tr>
+            <tr class="success">
+              <td>{{func.input}}</td>
+              <td>{{func.output}}</td>                          
+            </tr>
+            
+        </table>
+        
+{% if fid_min > 0  %}
+<a href="/app/show_func1/{{fid_min}}" >上一个</a>
+{% endif %}
+
+{% if fid_add < fid_num %}
+<a href="/app/show_func1/{{fid_add}}" >下一个</a>
+{% endif %}        
+        
+        <div class="row">
+          <div class="span2 offset3">贡献者:<a href="" >@{{func.user.username}}</a></div>
+        </div>
+    </div>      
+    
+      <div style="margin-top:20px;">
+       提出您的疑问和建议：
+      <form method="post" action="/search/detail/?id={{func.id}}">
+         <textarea rows="4"  name="comm" style="width:300px;"></textarea><br/>
+      
+         <button class="btn btn-success">提交</button>
+      </form>
+      </div>
+
+
+     <div class="row">
+       <div class="span1 offset3">
+         <a href="/app/fun_add"  title="返回创建首页"><i class="icon-hand-left"></i>返回</a>
+       </div>
+     </div>
+    
+
+  </div>
+  
+  
+  <div class="span5" style="margin-left:80px;">
+  
+   <div class="span1" style="margin-top:35px">
+
+   函数名<br />{% for fun in fun_list %}
+    <a href="/app/show_func/{{fun.id}}" > {{fun}}</a><br />
+   <hr width="100px">
+  {% endfor %}
+ 
+  </div>
+ 
+  <div class="span2" style="margin-top:35px">
+    语法格式<br />{% for fun in fun_list %}
+    {{fun.format}}<br />
+   <hr width="180px">
+    {% endfor %}
+
+  </div>
+<div class="span1" style="margin-top:35px">
+       所属模块<br />{% for fun in fun_list %}
+       {{fun.module}}<br />
+   <hr width="80px">  
+      {% endfor %}
+      <a href="/app/show_funcall" >更多></a>
+</div>
+<!--      相关讨论：
+     <hr/ style="width:300px;margin-top:0px;">
+     
+     
+     <div>
+
+       <div class="row" style="width:350px;margin-left:-30px;">
+         <a href="/search/qusoffun/" ><p class="text-error"> 问题1：</p></a>
+     
+         <blockquote >
+           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+           <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+         </blockquote>
+         
+         
+         <a href="" ><p class="text-error"> 问题2：</p></a>
+     
+         <blockquote >
+           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+           <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+         </blockquote>
+         
+         
+          
+       </div>
+       
+       
+       <div class="pagination pagination-centered">
+          <ul>
+            <li class="disabled"><a href=""><<</a></li>
+            <li class="active"><a href="">1</a></li>
+            <li class="active"><a href="">2</a></li>
+            <li class="active"><a href="">3</a></li>
+            <li class="active"><a href="">>></a></li>
+          </ul>
+        </div>
+     </div>
+      <div class="row" style="width:350px;margin-left:-30px;">
+      <p class="text-error"> 问题：</p>
+     
+         <blockquote >
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+        </blockquote>   
+        
+      <p class="text-warning"> 答：</p>
+        <blockquote class="pull-right">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+        </blockquote>
+       
+        
+
+       
+       
+     </div>
+   </div>
+    <div >
+    
+   
+        <div class="pagination pagination-centered">
+          <ul>
+            <li class="disabled"><a href=""><<</a></li>
+            <li class="active"><a href="">1</a></li>
+            <li class="active"><a href="">2</a></li>
+            <li class="active"><a href="">3</a></li>
+            <li class="active"><a href="">>></a></li>
+          </ul>
+        </div>
+    
+    </div>
+    <div >       
+     
+
+ 
+   <div>
+
+     <div class="row" style="width:350px;margin-left:-30px;">
+      <p class="text-error"> 问题：</p>
+     
+         <blockquote >
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+        </blockquote>   
+        
+      <p class="text-warning"> 答：</p>
+        <blockquote class="pull-right">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+        </blockquote>
+       
+        
+
+       
+       
+     </div>
+   </div>
+    <div >
+    
+   
+        <div class="pagination pagination-centered">
+          <ul>
+            <li class="disabled"><a href=""><<</a></li>
+            <li class="active"><a href="">1</a></li>
+            <li class="active"><a href="">2</a></li>
+            <li class="active"><a href="">3</a></li>
+            <li class="active"><a href="">>></a></li>
+          </ul>
+        </div>
+    
+    </div>
+    <div >
+      
+      <ul class="pager">
+        <li><a href="">上一问题</a></li>
+        <li><a href="">下一问题</a></li>
+      </ul>
+     
+    </div>
+      -->
+</div>
+    
+</div>    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

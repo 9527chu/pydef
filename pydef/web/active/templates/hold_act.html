@@ -1,0 +1,109 @@
+{% extends "base1.html" %}
+{% block title %}组织活动{% endblock %}
+{% block content %}
+   
+
+
+   <div class="container">
+      <div class="row">
+         <div class="span3" >
+         <p><a href=""></a></p>
+         <p><a href=""></a></p>
+         <a href=""></a>
+         <a href=""></a>
+         <a href=""></a>
+         
+         </div>
+         <div class="span9" >
+         <form method="post" action="/user/hold_act/" enctype="multipart/form-data">
+         活动标题：<input type="text" name="title"><br/>
+         活动说明：<textarea rows="5" name="hdcont"></textarea><br/>
+         活动照片：<input type="file" name="hdpic" ><br/>
+         活动时间：<input type="text" name="time" id="inputDate" class="inputDate"><i>例如：2013-04-28</i><br/>        
+         活动地点：<select class="span2" name="ddop">
+                   <option >邯郸</option>
+                   <option >北京 </option>
+                   <option >保定</option>
+                   <option >秦皇岛</option>
+                   <option >唐山</option>                   
+                     </select><br/>                         
+         活动类别：<select class="span2" name="lbop">
+                   <option value="e">聚餐</option>
+                   <option value="a">旅游</option>
+                   <option value="b">运动</option>
+                   <option value="g">棋盘</option>
+                   <option value="d">游戏</option>
+                   <option value="f">K歌</option>
+                   <option value="c">学习</option>
+                 </select><br/>
+         是否收费：<label class="radio inline">
+                    <input type="radio" name="sfop" onclick="money1();" id="y">
+                     收费&nbsp;&nbsp;&nbsp;<span id="money"></span>
+                     
+                 </label>
+                 <label class="radio inline" style="margin-left:70px;">
+                    <input type="radio" name="sfop" value="0">
+                    不收费
+                 </label><br/>
+         活动标签：&nbsp;<a onclick="addtag();" >+添加标签<i class="icon-tag"></i></a>
+              <div id="tag">              
+              &nbsp;&nbsp;
+             
+              </div>
+              <input type="hidden" name="tag" id="tagsave">
+                  
+             <input type="submit" class="btn" value="提交">
+             
+           </form>
+                
+         
+         
+         </div>
+      </div>
+   </div>
+   <script type="text/javascript" >
+   
+   function money1(){
+    var mny = document.getElementById('money');
+    var y = document.getElementById('y');
+    var money = prompt("本活动需要(单位/元)：");
+    if(money==""){
+      
+      money = prompt("请输入本活动需要的费用(单位/元)：");
+      
+     }else if(!(/(^[1-9]\d*$)/.test(money))){
+      money = prompt("请输入本活动需要的费用(单位/元)：");
+     }
+     mny.innerHTML=money+"元";
+     y.value = money;
+     y.setAttribute('value',money);
+     alert(y.value);
+            
+   }
+   
+   
+    function addtag(){
+    var tags = document.getElementById('tag');    
+    var tag = prompt("请添加您的组织的活动的标签：");
+    var tagsave = document.getElementById('tagsave');    
+    var spa = document.createElement('span');
+    if(tag==""){
+      
+      tag = prompt("至少添加一个：");
+      
+     }else if(tag != null){
+     spa.innerHTML='<a>'+tag+'<i class="icon-tag"></i></a>'+'&nbsp;&nbsp;&nbsp;<a title="删除" onclick="deltag();">x</a>';        
+     tagsave.value+='/'+tag;
+     tags.appendChild(spa);
+     }      
+   }
+   function deltag(){
+           
+   
+   }
+   
+   
+
+   </script>
+
+{% endblock %}

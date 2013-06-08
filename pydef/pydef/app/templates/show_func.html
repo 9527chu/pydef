@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}添加函数{% endblock %}
+{% block content %}
+<div class="row">
+ <div class="span4 offset1" style="margin-top:60px;font-size:20px">
+ 
+ 函数名称：{{ func }}<br />
+ <br />
+ 函数格式：{{func.format}}<br />
+<br />
+ 函数介绍：{{func.intro}}<br />
+<br />
+ 输入：{{func.input}}<br />
+<br />
+ 输出：{{func.output}}<br />
+<br />
+  </div>
+
+  <div class="span4 offset1" style="margin-top:60px;font-size:20px">
+  {{fun_list}}
+   </div> 
+   </div>
+{% endblock %}

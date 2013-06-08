@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}添加函数{% endblock %}
+{% block content %}
+
+ <div class="row">
+ <div class="span4 offset1" style="margin-top:35px">
+<form method="POST" action="">
+<table>
+{{af.as_table}}
+
+</table>
+
+  模块：<select name="module">
+    {% for i in modules %}
+    <option>{{i}}</option>
+    {%endfor%}
+     </select><br />
+<input type="submit" value="提交">
+</form>
+</div>
+
+ 
+<div class="span4 offset2" style="margin-top:30px">
+        <h4>最新添加的函数： </h4>
+</div>
+
+
+
+<div class="span1 offset2" style="margin-top:35px">
+
+
+函数名<br />{% for fun in fun_list %}
+<a href="/app/show_func1/{{fun.id}}" > {{fun}}</a><br />
+<hr width="220px" style="color:blue">
+{% endfor %}
+
+</div>
+
+<div class="span2" style="margin-top:35px">
+
+语法格式<br />{% for fun in fun_list %}
+{{fun.format}}<br />
+<hr width="220px">
+{% endfor %}
+
+</div>
+
+<div class="span2" style="margin-top:35px;">
+
+所属模块<br />{% for fun in fun_list %}
+<a href="/app/show_func1/{{fun.module.id}}" >{{fun.module}}<br />
+<hr width="80px">    
+{% endfor %}
+</div>
+
+</div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

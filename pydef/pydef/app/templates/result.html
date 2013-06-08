@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+<div class="row" style="margin-top:50px;">
+  <div class="span4 offset1" style="margin-left:120px;">
+  
+    <div>
+       
+        <h4>快速查找：</h4>
+       
+       <div class="row" style="margin-top:10px;margin-left:30px;">
+        <form method="post" action="/search/name/" class="form-search">
+        <!--<input type="text" name="funname" class="input-medium search-query" placeholder="请输入函数名">
+        <input type="submit" class="btn" value="查询">    -->
+         
+         
+         
+         <div class="input-append">
+          <input type="text" class="span2 search-query" placeholder="请输入函数名" name="funname"> 
+          <button type="submit" class="btn btn-info"><i class="icon-search"></i></button>
+         </div>
+         
+         
+         </form>
+       </div>
+    </div>
+    
+    <hr/>
+    <div style="margin-top:10px;">
+       
+        <h4>索引查找：</h4>
+      
+       <div>
+       <div class="row" style="margin-top:10px;">       
+       <a href="/search/suoyin/?index=all" >全部</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=_" >_</a>(下划线)&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=a">A</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=b">B</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=c">C</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=d">D</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=e">E</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=f">F</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=g">G</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=h">H</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=i">I</a>&nbsp;|
+       </div>
+       <div class="row" style="margin-top:10px;">
+       <a href="/search/suoyin/?index=j">J</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=k">K</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=l">L</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=m">M</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=n">N</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=o">O</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=p">P</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=q">Q</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=r">R</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=s">S</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=t">T</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=u">U</a>&nbsp;|&nbsp;
+       <a href="/search/suoyin/?index=v">V</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=w">W</a>
+       </div>
+       <div class="row" style="margin-top:10px;">
+       |&nbsp;<a href="/search/suoyin/?index=x">X</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=y">Y</a>&nbsp;|&nbsp;<a href="/search/suoyin/?index=z">Z</a>
+       </div>
+       </div>
+       
+       
+    </div>
+
+    <hr/>
+
+    <div style="margin-top:20px;">
+       
+       <h4>分类查询：</h4>        
+      
+       <div class="row" style="margin-left:30px;">
+       <form name="category_search" action="/search/category/" method="get">     
+          
+         {%for i in modules%}
+         
+          <label class="radio">
+             
+           <input type="radio" name="index"  value="{{i.name}}" id="optionsRadios{{i.id}}" onclick="document.category_search.submit();"  {% if name == i.name %}checked{% endif %}>
+             {{i.name}}
+            
+          </label> 
+            
+            {%endfor%}      	
+       </form>
+       </div>
+    </div>
+
+
+    <div class="row">
+      <div class="span1 offset3">
+       <a href="/search/"  title="返回查询首页"><i class="icon-hand-left"></i>返回</a>
+      </div>
+    </div>
+
+
+
+
+   </div>
+  
+  
+  <div class="span5" style="margin-left:120px;">
+
+
+  {%if juge == 4 %}
+
+      <div class="row">
+       <div class="span3">
+        <h4>函数名:<a href="/search/detail/?id={{funct.id}}" >{{funct.name}}</a> </h4>
+       </div>
+       <div class="span2" style="margin-left:-10px;margin-top:15px;">
+         <form method="post" action="/search/category/" style="display:none" name="mk">
+        <input type="hidden" value="{{funct.module.name}}" name="op">        
+          </form>
+         <a  onclick="document.mk.submit();" >{{funct.module.name}}</a>
+       </div>
+       
+      </div>
+     
+      <div>
+        <table class="table table-condensed" style="width:330px;">
+            <tr class="warning">
+              <td style="width:70px">语法格式：</td>
+              <td >{{funct.format}}</td>                          
+            </tr>
+            <tr class="info">
+              <td>函数说明：</td>
+              <td>{{funct.intro}}</td>                          
+            </tr>
+            
+        </table>
+        示例：
+         <table class="table table-condensed" style="width:330px;">
+            <tr class="error">
+              <td style="width:60px">input>></td>
+              <td>{{funct.inputs}}</td>                          
+            </tr>
+            <tr class="success">
+              <td>output>></td>
+              <td>{{funct.outputs}}</td>                          
+            </tr>
+            
+        </table>
+        <div class="row">
+        
+        
+          <div class="span2 ">贡献者:<a href="" >@{{funct.user.username}}</a></div>
+          <div class="span2 offset1" >
+          <form action="/search/like/" method="post" name="like" style="display:none">
+           <input type="text" value="{{funct.id}}" name="lk">
+           <input type="text" value="{{rp}}?id={{funct.id}}" name="rp">
+          </form>
+          <img src="/statics/picture/heart.png" title="赞同" onclick="document.like.submit();">
+             <strong>+</strong>
+           
+          {{funct.fans}}
+             
+                 
+           
+           </div>
+          
+        
+        </div>  
+      </div>      
+      
+      
+      
+      
+      
+     
+
+
+  <div style="margin-top:10px;">
+       相关讨论：
+     <hr/ style="width:300px;margin-top:0px;">
+    <div class="row" style="width:350px;margin-left:10px;">
+    
+    
+        {%for quse in quses%}
+         <blockquote >
+        <p>{{quse.content}}</p>
+        <small>@<cite title="Source Title">{{quse.user.username}}</cite></small>
+        </blockquote>
+        {%endfor%}
+        
+        
+        
+
+        <div class='span2 offset1'>
+     <a href="/search/detail/?id={{funct.id}}" >了解更多...</a>
+       </div>
+       
+    </div>
+ </div>
+    
+    
+    <div class="row ">
+      
+    </div>
+
+
+
+   
+   {%else%}   
+       
+      <h4 ><p class="text-success">搜索结果</p></h4>
+        
+      
+     <div class="row" style="margin-left:20px;">
+     
+     {%if functs%} 
+      <table class="table table-hover" style="width:300px;">
+         <tr><th>函数名</th><th>函数说明</th><th>贡献人</th></tr>      
+      
+          {%for funct in functs%}         
+         <tr>
+         <td><a href="/search/disp/?id={{funct.id}}" >{{funct.name}}</td>
+         <td><abbr title="{{funct.intro}}" class="text-info">{{funct.intro|truncatechars:9}}</abbr></td>            
+         <td>{{funct.user.username}}</td>
+         
+         </tr>
+      
+   
+         {%endfor%}
+   
+      </table>
+ 
+      <div class="row">
+        <div class="pagination pagination-centered">
+          <ul>
+                        
+                 
+                        
+                        
+           {% if functs.has_previous %}
+            <li class="active"><a href="{{rp}}?index={{idx}}&page={{ functs.previous_page_number }}"><<</a></li>
+            {% else %}
+            <li class="disabled"><a ><<</a></li>
+            {% endif %}
+            
+            {% for i in f_list %}
+              {% if i == functs.number %}
+            <li class="disabled"><a >{{i}}</a></li>
+               {% else %}    
+            <li class="active"><a href="{{rp}}?index={{idx}}&page={{i}}">{{i}}</a></li>
+               {% endif %} 
+              {% endfor %}
+            {% if functs.has_next %}      
+            <li class="active"><a href="{{rp}}?index={{idx}}&page={{ functs.next_page_number }}">>></a></li>
+               {% else%}    
+           <li class="disabled"><a >>></a></li>
+               {% endif %}   
+          </ul>
+        </div>
+      </div>
+
+      
+      
+      
+      
+      {%else%}
+        <p class="text-warning">暂时没有您要找的函数</p>      
+      
+      
+      {%endif%}
+     </div>
+     
+      {%endif%}
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    
+  </div>
+
+
+
+
+
+<script type="text/javascript">
+function nextpage(){
+    p = new XMLHttpRequest()
+    p.open('GET','/turnpage/',true)
+    p.send();
+    document.getElementById("myDiv").innerHTML=p.responseText;
+    
+} 
+ 
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

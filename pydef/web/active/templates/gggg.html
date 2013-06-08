@@ -1,0 +1,103 @@
+{% extends "base_index.html" %}
+{% block title %}逛逛{% endblock %}
+{% block content %}
+   <div style="height:15px;margin-left:15px;">
+   <div >
+   <h3 >逛逛</h3>
+   
+   
+   </div>
+   </div>
+   <hr/>
+    <div class="container">
+        <div class="row">
+            
+          <div class="span6">
+              {% for s in say %}          
+             <div class="row">
+               <div class="span2">
+               <div style="background-image:url(/statics/image/bghdimg.jpg);width:100px;height:100px;cursor:pointer">                             
+               <a href="" ><img src="/static/{{s.user.get_profile.headimg}}" ></a>
+               </div>               
+               
+               <a href="/user/home/?id={{s.user.id}}" >{{s.user.username}}</a>&nbsp;&nbsp;&nbsp;
+               
+                {% if s.user in up.fllowp.all%}
+               <a href="/qxp/?id={{s.user.id}}" ><input type="button" value="取消关注"></a>
+                {%else%}
+                    {%if s.user == up.user %}
+                    {%else%}
+               <a href="/flwp/?id={{s.user.id}}" >
+               <input type="button" value="+关注" class="btn"></a>
+                    {%endif%}
+                 {%endif%}               
+               </a>
+               </div>
+               <div class="span4" style="margin-left:-15px;">                             
+               {{s.content}}<br/>      
+               {{s.time}}
+                 {% for comm in comms%}
+                 <div class="row">
+                   <div class="span3 offset1">
+                     {{comm.content}}<br/>
+                     {{comm.time}}
+                    </div>                 
+                 </div>
+                 {%endfor%}
+                 
+                 <div class="row" style="display:none" id="hideform{{s.id}}">
+                  <div class="span4">
+                  <form action="/saycmm/?say_id={{s.id}}" method="post">
+                  <textarea rows="3" class="span3" name="content"></textarea><a onclick="fuyuan({{s.id}});">收起</a>
+                  <br/>
+                  <button>发表</button>
+                  </form>
+                   </div>
+                </div>
+                
+                 <div class="row">
+                    <div class="span1 offset3">
+                    <button onclick="displfm({{s.id}});">评论</button>
+                    </div>
+                 </div>
+               </div>           
+             </div>
+             <hr/>
+              {% endfor%}         
+         </div>
+         
+              
+        </div>
+    
+    
+    
+    
+    
+    
+    </div>
+<script type="text/javascript" >
+ 
+      function displfm(id){
+         var pl = document.getElementById('pl'+id);
+ 			var hf = document.getElementById('hideform'+id);
+         hf.style.display="block";
+         pl.style.display="none";
+    
+
+}
+    function fuyuan(id){
+		var pl = document.getElementById('pl'+id);
+ 		var hf = document.getElementById('hideform'+id);
+    hf.style.display="none";
+    pl.style.display="block";
+             
+    }
+
+
+</script>
+
+
+
+
+
+{%endblock%}

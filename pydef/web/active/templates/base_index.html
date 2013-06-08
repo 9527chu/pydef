@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{%block title%}{%endblock%}</title>    
+    <link rel="stylesheet" type="text/css" href="/statics/css/bootstrap.css" /> 	
+    <link rel="stylesheet" type="text/css" href="/statics/css/index.css" />
+    <style type="text/css">
+     input{
+          width: 150px;  
+          margin-bottom: 
+         
+     }
+    </style>
+</head>
+<body>
+
+	<div class="container" id="head">
+		<div class="row">
+		     <div class="span3"><img src="/statics/image/logt2.jpg" class="img-rounded"></div>
+	        <div class="span6"><img src="/statics/image/x-3.jpg"  class="img-circle"></div>
+        	<div class="span3">
+        	   {% if user.is_authenticated %}        	  
+        	   welcome&nbsp;&nbsp;&nbsp;<a href="/user/home/{{user.id}}/">{{user.username}}</a><br/>
+            <div class="row">  
+               <div class="span2">           	   
+         	   <div style="background-image:url(/statics/image/bghdimg.jpg);width:100px;height:100px;">
+         	   <a href="/user/home/" ><img src="/static/{{up.headimg}}" ></a>
+         	   </div>
+               </div>
+               <div style="position:relative;right:25px;">
+                              
+               <a href="" >关注好友({{up.fpnum}})</a><br/>
+               <a href="" >关注活动({{up.fanum}})</a>
+               <a href="" >参加活动({{up.janum}})</a>
+             	<a href="" >粉丝({{up.fans}})</a>
+         
+             	</div>
+            </div>  
+        	   <br/>
+        	   <div style="margin-top:-10px;">
+        	   <a href="/user/home/">个人主页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/logout/" >退出</a>
+            </div>        	   
+        	   {% else %}
+	         <form class="form-horizontal" id="hdform" method="post" action="/index/">
+               <table>        	               	      
+        	       {{lf.as_table}}
+        	       </table>
+        	        	       
+                <div class="row"> 
+                	<div class="span1 " style="padding-left: 40px;">            
+	             		<button type="submit" class="btn " > 登陆</button>
+	             	</div>
+	             	<div class="span1 "  style="padding-top: 10px;">
+	       	    		<strong>|</strong>
+                		<a href="/register/">注册</a>
+                	</div>
+                </div>                                
+	         </form>	         	         
+	         {% endif %}
+	      </div>
+	  </div>	         
+   </div>
+   
+    <div id="headb" class="container"> 
+	         <div id="mulu" class="row">
+	             <div class="span4 offset4">
+	               <ul class="nav nav-pills">
+                 		<li class="active">	             
+                			<a href="/index/">首页</a>
+                		</li>
+                		<li class="active">
+               		 	<a href="/index/huodong/">活动</a>
+                  	</li>  
+                		<li class="active">
+                			<a href="/index/haowan/">好玩</a>
+                		</li>
+               		<li class="active">
+                			<a href="/index/meiwei/ ">美味</a>
+                		</li>
+                		<li class="active">
+                			<a href="/index/gggg/">逛逛</a>
+                		</li>
+                	</ul> 
+                </div>                           
+               <div class="span4">                    
+                <form class="form-search">
+                   
+                    <input type="text" class="input-medium search-query" placeholder="好友/活动/好玩/美味" name="search">
+                    <input type="submit" class="btn" value="搜索">
+                 
+                </form>                    
+               </div>                
+           </div> 
+     </div>
+ 	<div>
+    	<ul class="breadcrumb">
+    		<li><a href="/index/">首页</a> <span class="divider">/</span></li>
+    		<li><a href="gggg">逛逛</a> <span class="divider">/</span></li>
+    		<li class="active"></li>
+    	</ul>
+   </div>
+{% block content %}{% endblock %}
+   
+   
+   
+    
+  
+  
+
+  <div >
+         
+     <div class="row">
+      
+       <div class="span9 offset1">
+       <hr/>
+   <a href="" >关于我们</a>&nbsp;|&nbsp;<a href="" > 联系我们 </a>&nbsp;|&nbsp;<a href="" > 服务条款</a>&nbsp;|&nbsp;<a href="" > 常见问题</a>&nbsp;|&nbsp;<a href="" >手机版</a>&nbsp;|&nbsp;<a href="" >客户端</a>|&nbsp;<a href="" >加入我们</a>&nbsp;|&nbsp;<a href="" >给我们建议</a>&nbsp;|&nbsp;<a href="" >友情链接</a>&nbsp;|&nbsp;<a href="" >gerlaor周刊</a>&nbsp;|
+       </div>
+     </div>
+   </div>
+</body>
+</html>
